@@ -12,20 +12,20 @@ def walk(node, props = []):
             for i in range(3):
                 walk(item[0], props + [key, str(i)])
         else:
-            name = ' '.join(props + [key]).title()
-            name = re.sub('_+', ' ', name)
-            name = re.sub('Id', 'ID', name)
-            name = re.sub('Url', 'URL', name)
+            label = ' '.join(props + [key]).title()
+            label = re.sub('_+', ' ', label)
+            label = re.sub('Id', 'ID', label)
+            label = re.sub('Url', 'URL', label)
             # If a numeric value is found, adds 1 and move to end
-            name = re.sub(
+            label = re.sub(
                 '(.+)(\s\d)(\s.+)',
                 lambda m: m.groups()[0] + m.groups()[2] + ' ' + str((int(m.groups()[1]) + 1)),
-                name
+                label
             )
 
             newObj = {}
             newObj['key'] = '__'.join(props + [key])
-            newObj['name'] = name
+            newObj['label'] = label
 
             objs.append(newObj);
 
