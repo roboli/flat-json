@@ -16,6 +16,7 @@ def walk(node, props = []):
             name = re.sub('_+', ' ', name)
             name = re.sub('Id', 'ID', name)
             name = re.sub('Url', 'URL', name)
+            # If a numeric value is found, adds 1 and move to end
             name = re.sub(
                 '(.+)(\s\d)(\s.+)',
                 lambda m: m.groups()[0] + m.groups()[2] + ' ' + str((int(m.groups()[1]) + 1)),
