@@ -8,6 +8,9 @@ def walk(node, props = []):
     for key, item in node.items():
         if type(item) is dict:
             walk(item, props + [key])
+        elif type(item) is list:
+            for i in range(3):
+                walk(item[0], props + [key, str(i)])
         else:
             name = ' '.join(props + [key]).title()
             name = re.sub('_+', ' ', name)
