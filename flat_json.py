@@ -10,7 +10,8 @@ def walk(node, props = []):
             walk(item, props + [key])
         elif type(item) is list:
             for i in range(3):
-                walk(item[0], props + [key, str(i)])
+                if item and type(item[0]) is dict:
+                    walk(item[0], props + [key, str(i)])
         else:
             label = ' '.join(props + [key]).title()
             label = re.sub('_+', ' ', label)
@@ -31,7 +32,6 @@ def walk(node, props = []):
 
 txt = pyperclip.paste()            
 data = json.loads(txt)
-for node in data:
-    walk(node)
+walk(data)
 
 pyperclip.copy(json.dumps(objs, indent = 2, sort_keys = True))
