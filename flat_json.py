@@ -14,6 +14,7 @@ def walk(node, props = []):
                     walk(item[0], props + [key, str(i)])
         else:
             label = ' '.join(props + [key])
+            label = label[0].upper() + label[1:]
             label = re.sub('_+', ' ', label)
             label = re.sub('Id', 'ID', label)
             label = re.sub('Url', 'URL', label)
