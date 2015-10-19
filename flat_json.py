@@ -13,7 +13,7 @@ def walk(node, props = []):
                 if item and type(item[0]) is dict:
                     walk(item[0], props + [key, str(i)])
         else:
-            label = ' '.join(props + [key]).title()
+            label = ' '.join(props + [key])
             label = re.sub('_+', ' ', label)
             label = re.sub('Id', 'ID', label)
             label = re.sub('Url', 'URL', label)
@@ -23,6 +23,8 @@ def walk(node, props = []):
                 lambda m: m.groups()[0] + m.groups()[2] + ' ' + str((int(m.groups()[1]) + 1)),
                 label
             )
+            # Split camel case
+            label = re.sub("([a-z])([A-Z])", "\g<1> \g<2>", label)
 
             newObj = {}
             newObj['key'] = '__'.join(props + [key])
