@@ -14,18 +14,21 @@ def walk(node, props = []):
                     walk(item[0], props + [key, str(i)])
         else:
             label = ' '.join(props + [key])
-            label = label[0].upper() + label[1:]
             label = re.sub('_+', ' ', label)
-            label = re.sub('Id', 'ID', label)
-            label = re.sub('Url', 'URL', label)
+            
             # If a numeric value is found, adds 1 and move to end
             label = re.sub(
                 '(.+)(\s\d)(\s.+)',
                 lambda m: m.groups()[0] + m.groups()[2] + ' ' + str((int(m.groups()[1]) + 1)),
                 label
             )
+            
             # Split camel case
             label = re.sub("([a-z])([A-Z])", "\g<1> \g<2>", label)
+
+            label = label.title()
+            label = re.sub('Id', 'ID', label)
+            label = re.sub('Url', 'URL', label)
 
             newObj = {}
             newObj['key'] = '__'.join(props + [key])
