@@ -14,7 +14,7 @@ def walk(node, props = []):
                     walk(item[0], props + [key, str(i)])
         else:
             label = ' '.join(props + [key])
-            label = re.sub('_+', ' ', label)
+            label = re.sub('[_-]+', ' ', label)
             
             # If a numeric value is found, adds 1 and move to end
             label = re.sub(
